@@ -3,70 +3,65 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container pb-5">
 
+<div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2>Employee List</h2>
+            <h2 class="text-primary">Employee List</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp asp-controller="Employee" asp-action="Create" class="btn btn-success text-black">
-                <i class="bi bi-patch-plus"></i> &nbsp; Create New Employee
+            <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Employee
             </a>
         </div>
     </div>
-
+    <br /><br />
 
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th class="text-center">
+                <th>
                     Identity Number
                 </th>
-                <th class="text-center">
-                    FirstName
+                <th>
+                    First Name
                 </th>
-                <th class="text-center">
-                    LastName
+                <th>
+                    Last Name
                 </th>
-                @*<th class="text-center">
-                    Employee Count
-                </th>*@
-                <th class="text-center">
-                    CompanyId
+                <th>
+                    Company Id
                 </th>
                 <th></th>
             </tr>
         </thead>
-        <tbody @foreach (var obj in Model)
-               {
-            <tr>
-                <td width="25%" class="text-center">
-                    @obj.IdentityNumber
-                </td>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="30%">
+                        @obj.IdentityNumber
+                    </td>
+                    <td width="30%">
+                        @obj.FirstName
+                    </td>
+                    <td width="30%">
+                        @obj.LastName
+                    </td>
+                    <td width="10%">
+                        @obj.CompanyId
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Employee" asp-action="Edit" asp-route-id="@obj.Id"
+                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-controller="Employee" asp-action="Delete" asp-route-id="@obj.Id"
+                           class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-                 <td width="10%" class="text-center">
-                    @obj.FirstName
-                </td>
-                <td width="15%" class="text-center">
-                    @obj.LastName
-                </td>
-                @*<td width="10%" class="text-center">
-                    @obj.EmployeeCount
-                </td>*@
-                <td width="40%" class="text-center">
-                    @obj.CompanyId
-                </td>
-                <td width="10%">
-
-                    <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@obj.Id"> <i class="bi bi-pencil"></i> Edit</a>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
     </table>
-
-
 </div>

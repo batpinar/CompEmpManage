@@ -15,8 +15,8 @@ namespace CompanyEmployeeManagement.Web.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Employee> obj = _dbContext.Employees;
-            return View(obj);
+            IEnumerable<Employee> objEmployeeList = _dbContext.Employees;
+            return View(objEmployeeList);
         }
 
         //GET
@@ -30,20 +30,84 @@ namespace CompanyEmployeeManagement.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Employee obj)
         {
-            var emp = _dbContext.Companies.Single(i => i.Id == obj.CompanyId);
+            if (obj.IdentityNumber == obj.CompanyId.ToString())
+            {
+                ModelState.AddModelError("name", "The CompanyId cannot exactly match the IdentityNumber.");
+            }
+
+            _dbContext.Employees.Add(obj);
+            _dbContext.SaveChanges();
+            TempData["success"] = "Employee created successfully";
+            return RedirectToAction("Index");
+
+        }
+        //GET
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var employeeFromDb = _dbContext.Employees.Find(id);
 
 
-            if (emp.Id != obj.CompanyId )
+            if (employeeFromDb == null)
             {
-                ModelState.AddModelError("CompanyId", "The Company Id cannot exactly match the EmployeeCompanyId .");
+                return NotFound();
             }
-            if (ModelState.IsValid)
+
+            return View(employeeFromDb);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Employee obj)
+        {
+            if (obj.IdentityNumber == obj.CompanyId.ToString())
             {
-                _dbContext.Employees.Add(obj);
-                _dbContext.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("name", "The CompanyId cannot exactly match the IdentityNumber.");
             }
-            return View(obj);
+
+            _dbContext.Employees.Update(obj);
+            _dbContext.SaveChanges();
+            TempData["success"] = "Employee updated successfully";
+            return RedirectToAction("Index");
+        }
+
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var employeeFromDb = _dbContext.Employees.Find(id);
+
+            if (employeeFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(employeeFromDb);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            var obj = _dbContext.Employees.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Employees.Remove(obj);
+            _dbContext.SaveChanges();
+            TempData["success"] = "Employee deleted successfully";
+            return RedirectToAction("Index");
+
         }
     }
 }

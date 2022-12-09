@@ -1,53 +1,41 @@
 ﻿@model Company
 
 <form method="post" asp-action="Edit">
-    <div class="border p-4 mt-5">
-        <div class="row pb-2">
-            <h2 class="text-primary">
-                Edit Company
-            </h2>
-            <hr />
-        </div>
-        @*<div asp-validation-summary="All"></div>*@
-        <div class="mb-3">
-            <label asp-for="CompanyName"></label>
-            <input asp-for="CompanyName" class="form-control" />
-            <span asp-validation-for="CompanyName" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="TaxNumber"></label>
-            <input asp-for="TaxNumber" class="form-control" />
-            <span asp-validation-for="TaxNumber" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="TaxOffice"></label>
-            <input asp-for="TaxOffice" class="form-control" />
-            <span asp-validation-for="TaxOffice" class="text-danger"></span>
-        </div>
-
-       @* <div class="mb-3">
-            <label asp-for="EmployeeCount"></label>
-            <input asp-for="EmployeeCount" class="form-control" />
-            <span asp-validation-for="EmployeeCount" class="text-danger"></span>
-        </div>*@
-
-        <div class="mb-3">
-            <label asp-for="Adresses"></label>
-            <input asp-for="Adresses" class="form-control" />
-            <span asp-validation-for="Adresses" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:130px">Update</button>
-        <a asp-controller="Company" asp-action="Index" class="btn btn-secondary" style="width:130px">
-            Back To List
-        </a>
-    </div>
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Company</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="CompanyName"></label>
+			<input asp-for="CompanyName" class="form-control" />
+			<span asp-validation-for="CompanyName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="TaxNumber"></label>
+			<input asp-for="TaxNumber" class="form-control" />
+			<span asp-validation-for="TaxNumber" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="TaxOffice"></label>
+			<input asp-for="TaxOffice" class="form-control" />
+			<span asp-validation-for="TaxOffice" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Adresses"></label>
+			<input asp-for="Adresses" class="form-control" />
+			<span asp-validation-for="Adresses" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Company" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
 </form>
 
-@section Scripts
-    {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-    }
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

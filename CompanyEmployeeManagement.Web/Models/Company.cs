@@ -1,27 +1,28 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompanyEmployeeManagement.Web.Models;
 
-public class Company : BaseEntity
+public class Company
 {
-    [DisplayName("Company Name")]
+    public int Id { get; set; }
+    //[DisplayName("Company Name")]
+    //[Column(TypeName = "nvarchar(150)")]
+    [Required]
     public string CompanyName { get; set; }
 
-    [DisplayName("Tax Number")]
-    //[StringLength(11,ErrorMessage = "Tax Nubmer cannot exceed 10 digits.")]
+    //[DisplayName("Tax Number")]
+    //[Column(TypeName = "nvarchar(10)")]
     public string TaxNumber { get; set; }
 
-    [DisplayName("Tax Office")]
+    //[Column(TypeName = "nvarchar(150)")]
+    //[DisplayName("Tax Office")]
     public string TaxOffice { get; set; }
 
-    [DisplayName("Employee Count")]
-    //[MaxLength(100000)]
-    //public int EmployeeCount { get; set; }
-
-    //[StringLength(300)]
+    //[Column(TypeName = "nvarchar(300)")]
     public string Adresses { get; set; }
 
-
+    public virtual ICollection<Employee> Employees { get; set; }
 
 }
